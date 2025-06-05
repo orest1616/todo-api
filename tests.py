@@ -47,3 +47,21 @@ class TaskAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
         self.assertEqual(response.data[0]['title'], 'Task 1')
+
+    def test_filter_by_status(self):
+        Task.objects.create(title="Completed Task", status="completed", user=self.user)
+        Task.objects.create(title="Pending Task", status="pending", user=self.user)
+
+        response = self.client.get('/api/tasks/?status=completed')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['status'], 'completed')
+
+    def test_filter_by_due_date(self):
+        Task.objects.create(title="Due Today", due_date="2025-06-10", user=self.user)
+        Task.objects.create(title="Later Task", due_date="2025-12-31", user=self.user)
+
+        response = self.client.get('/api/tasks/?due_date=2025-06-10')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['due_date'], '2025-06-10')
