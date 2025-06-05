@@ -26,7 +26,8 @@ Download Git: https://git-scm.com/downloads
 Verify:
 
 ```bash
-git --version
+git clone https://github.com/orest1616/todo-api
+cd todo-api
 ```
 
 ---
