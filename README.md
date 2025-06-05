@@ -118,6 +118,17 @@ Supports filtering by `status` and `due_date` via query params:
 
 ---
 
+## Viewing Request Logs
+### All HTTP requests are automatically logged to the file logs/requests.log.
+### To view logs in real time via Docker, run the following command:
+```bash
+docker-compose exec web tail -f logs/requests.log
+```
+###  If the logs/ folder does not exist yet, create it in the root directory of the project before running the app:
+```bash
+mkdir logs
+```
+
 ## 📂 Tech Stack
 
 - Python 3.11
@@ -126,15 +137,5 @@ Supports filtering by `status` and `due_date` via query params:
 - PostgreSQL
 - JWT Auth (Simple JWT)
 - Docker & Docker Compose
-
----
-
-## ✅ Done ✔️
-
-- ✅ Auth via JWT
-- ✅ CRUD operations for tasks
-- ✅ Filtering by `status` & `due_date`
-- ✅ Dockerized setup
-- ✅ Unit tests
 
 ---
