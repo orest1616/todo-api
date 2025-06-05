@@ -3,7 +3,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from tasks.models import Task
 from rest_framework_simplejwt.tokens import RefreshToken
-
+from django.urls import reverse
 class TaskAPITestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='admin', password='admin')
@@ -38,3 +38,12 @@ class TaskAPITestCase(APITestCase):
         task = Task.objects.create(title="To be deleted", user=self.user)
         response = self.client.delete(f'/api/tasks/{task.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_get_tasks_list(self):
+        Task.objects.create(title="Task 1", user=self.user)
+        Task.objects.create(title="Task 2", user=self.user)
+        url = reverse('task-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data[0]['title'], 'Task 1')
