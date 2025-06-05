@@ -37,7 +37,7 @@ cd todo-api
 ### 1. Clone the repository
 
 ```bash
-
+git clone https://github.com/orest1616/todo-api
 ```
 
 ### 2. Build and run containers
