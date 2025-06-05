@@ -7,6 +7,8 @@ services:
       POSTGRES_DB: todo_db
       POSTGRES_USER: todo_user
       POSTGRES_PASSWORD: todo_pass
+      DB_HOST: db
+      DB_PORT: 5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -29,6 +31,9 @@ services:
       DB_PASSWORD: todo_pass
       DB_HOST: db
       DB_PORT: 5432
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@example.com
+      DJANGO_SUPERUSER_PASSWORD: admin
 
 volumes:
   postgres_data:
